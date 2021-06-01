@@ -1,0 +1,30 @@
+{
+  "name": "@datagetter.cn/image-cropper",
+  "version": "1.0.0",
+  "description": "Image Cropper used in multiple environments, such as WeChat, Web, H5, powerd by datagetter.cn",
+  "main": "build/lib.js",
+  "directories": {
+    "example": "example"
+  },
+  "dependencies": {
+    "@datagetter.cn/ycc": "0.0.9"
+  },
+  "devDependencies": {
+    "webpack": "^4.46.0",
+    "webpack-cli": "^4.7.0"
+  },
+  "scripts": {
+    "build": "webpack",
+    "watch": "webpack --progress --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lizhiqianduan/image-cropper.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lizhiqianduan/image-cropper/issues"
+  },
+  "homepage": "https://github.com/lizhiqianduan/image-cropper#readme"
+}
