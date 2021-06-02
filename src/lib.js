@@ -9,13 +9,16 @@ import Ycc from '@datagetter.cn/ycc';
 /**
  * 裁剪图片
  * @param {*} imageUrl 图片地址
- * @param {*} options 配置参数
- * @param {*} options.canvasDom canvas容器
- * @param {*} options.wrapW 可视区宽度
- * @param {*} options.wrapH 可视区高度
- * @param {*} options.cropW 裁剪区的高
- * @param {*} options.cropH 裁剪区高度
- * @param {*} options.callback 完成/取消裁剪的回调
+ * @param {Object} options 配置参数
+ * @param {HTMLCanvasElement} options.canvasDom canvas容器
+ * @param {Number} options.wrapW 可视区宽度
+ * @param {Number} options.wrapH 可视区高度
+ * @param {Number} options.cropW 裁剪区的高
+ * @param {String} options.maskColor 遮罩的色值
+ * @param {String} options.lineColor 线条的色值
+ * @param {Boolean} options.enableZoom 允许缩放
+ * @param {Boolean} options.enableRotate 允许旋转
+ * @param {Boolean} options.enableDrag 允许拖拽
  * @constructor
  */
 function Cropper(imageUrl,options){
@@ -29,7 +32,9 @@ function Cropper(imageUrl,options){
         cropH:200,
         maskColor:'rgba(0,0,0,0.6)',
         lineColor:'#fff',
-        callback: function(){}
+        enableZoom:true,
+        enableRotate:true,
+        enableDrag:true,
     },options);
 
     this.options = options;
@@ -170,6 +175,7 @@ Cropper.prototype._addImage = function(image){
     this.ycc.gesture.ondragging = function(e){
         if(this.ismutiltouching) return;
         if(!this.userData) return;
+        if(!cropper.options.enableDrag) return;
 
         var startPos = this.userData.startPos;
         var startRect = this.userData.startRect;
@@ -190,6 +196,8 @@ Cropper.prototype._addImage = function(image){
     // 绑定缩放事件
     this.ycc.gesture.onzoom = function(e){
         // alert('zoom '+e.zoomRate);
+        if(!cropper.options.enableZoom) return;
+
         var rate = e.zoomRate;
         imageRect.width = tempRect.width*rate;
         imageRect.height =tempRect.height*rate;
@@ -199,8 +207,9 @@ Cropper.prototype._addImage = function(image){
         imageRect.y = tempRect.y-(imageRect.height-tempRect.height)/2;
     };
     this.ycc.gesture.onrotate = function(e){
-        var angle = e.angle;
+        if(!cropper.options.enableRotate) return;
 
+        var angle = e.angle;
         cropper.imageUI.anchorX = imageRect.x+imageRect.width/2;
         cropper.imageUI.anchorY = imageRect.y+imageRect.height/2;
         cropper.imageUI.rotation += angle;

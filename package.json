@@ -14,8 +14,8 @@
     "webpack-cli": "^4.7.0"
   },
   "scripts": {
-    "build": "webpack",
-    "watch": "webpack --progress --watch"
+    "build": "webpack --config ./webpack.config.prod.js",
+    "watch": "webpack --progress"
   },
   "repository": {
     "type": "git",
