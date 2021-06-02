@@ -7,7 +7,7 @@
     "example": "example"
   },
   "dependencies": {
-    "@datagetter.cn/ycc": "0.0.9"
+    "@datagetter.cn/ycc": "0.0.10"
   },
   "devDependencies": {
     "webpack": "^4.46.0",

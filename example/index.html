@@ -8,7 +8,13 @@
 <body>
 
 <canvas id="canvas"></canvas>
-
+<div>
+	<button onclick="takePhoto(this)">截图</button>
+	<button onclick="onzoom(1.1)">放大</button>
+	<button onclick="onzoom(0.9)">缩小</button>
+	<button onclick="onrotate(10)">旋转</button>
+</div>
+<canvas id="photo" style="display: none;">
 
 </body>
 </html>
@@ -17,4 +23,24 @@
 <script src="../build/lib.js"></script>
 <script src="../build/test.js"></script>
 <!-- <script src="../src/lib.js"></script> -->
+<script>
 
+window.takePhoto = function (e){
+    var imgData = cropper.getCropImage();
+    var photo = document.getElementById('photo');
+    photo.width = cropper.options.cropW*cropper.ycc.dpi;
+    photo.height = cropper.options.cropH*cropper.ycc.dpi;
+    photo.style.width = cropper.options.cropW + 'px';
+    photo.style.background = '#000'
+    photo.getContext('2d').putImageData(imgData,0,0);
+    photo.style.display = 'inline-block'
+}
+window.onzoom = function (rate) {
+	cropper.ycc.gesture.onmultistart.call(cropper.ycc.gesture);
+	cropper.ycc.gesture.onzoom.call(cropper.ycc.gesture,{zoomRate:rate||1.1});
+}
+window.onrotate = function (angle) {
+	cropper.ycc.gesture.onmultistart.call(cropper.ycc.gesture);
+	cropper.ycc.gesture.onrotate.call(cropper.ycc.gesture,{angle:angle||20});
+}
+</script>

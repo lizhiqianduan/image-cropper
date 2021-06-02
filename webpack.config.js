@@ -5,7 +5,7 @@ module.exports = {
       lib:'./src/lib.js',
       test:'./src/test.js'
   },
-  devtool: 'source-map',
+  devtool: 'cheap-module-eval-source-map',
   output: {
     libraryTarget: "umd",
     path: path.resolve(__dirname, 'build')
