@@ -164,6 +164,8 @@ Cropper.prototype._addImage = function(image){
 
     // 缩放前的临时区域
     var tempRect = null;
+    // 旋转前的临时角度
+    var tempRotation = 0;
     // 监听手势事件
     this.ycc.gesture.ondragstart = function(e) {
         console.log(e,1111);
@@ -190,6 +192,7 @@ Cropper.prototype._addImage = function(image){
     }
     this.ycc.gesture.onmultistart = function(e){
         tempRect = new Ycc.Math.Rect(cropper.imageUI.rect); 
+        tempRotation = cropper.imageUI.rotation;
         // 将userdata设置成null 阻止缩放后立即响应拖拽
         this.userData = null;
     };
@@ -212,7 +215,7 @@ Cropper.prototype._addImage = function(image){
         var angle = e.angle;
         cropper.imageUI.anchorX = imageRect.x+imageRect.width/2;
         cropper.imageUI.anchorY = imageRect.y+imageRect.height/2;
-        cropper.imageUI.rotation += angle;
+        cropper.imageUI.rotation = tempRotation + angle;
     };
 
 }
