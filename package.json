@@ -1,7 +1,7 @@
 {
   "name": "@datagetter.cn/image-cropper",
   "version": "1.0.0",
-  "description": "Image Cropper used in multiple environments, such as WeChat, Web, H5, powerd by datagetter.cn",
+  "description": "Image Cropper used in multiple environments, such as WeChat, Web, H5, powerd by http://datagetter.cn",
   "main": "build/lib.js",
   "directories": {
     "example": "example"
@@ -10,6 +10,7 @@
     "@datagetter.cn/ycc": "0.0.10"
   },
   "devDependencies": {
+    "clean-webpack-plugin": "^4.0.0-alpha.0",
     "webpack": "^4.46.0",
     "webpack-cli": "^4.7.0"
   },

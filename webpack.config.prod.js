@@ -1,13 +1,17 @@
 const path = require('path');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 
 module.exports = {
   entry: {
       lib:'./src/lib.js',
       test:'./src/test.js'
   },
-  // devtool: 'cheap-module-eval-source-map',
+  plugins: [
+    new CleanWebpackPlugin()
+  ],
   output: {
     libraryTarget: "umd",
     path: path.resolve(__dirname, 'build')
   }
+  
 };

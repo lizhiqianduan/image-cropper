@@ -1,2 +1,2 @@
 # image-cropper
-Image Cropper used in multiple environments, such as WeChat, Web, H5, powerd by datagetter.cn
+Image Cropper used in multiple environments, such as WeChat, Web, H5, powerd by http://datagetter.cn
