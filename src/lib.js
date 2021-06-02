@@ -16,7 +16,8 @@ import Ycc from '@datagetter.cn/ycc';
  * @param {Number} options.cropW 裁剪区的高
  * @param {String} options.maskColor 遮罩的色值
  * @param {String} options.lineColor 线条的色值
- * @param {Boolean} options.enableZoom 允许缩放
+ * @param {Boolean} options.enableZoom 允许双指缩放
+ * @param {Boolean} options.enableDoubleTapZoom 允许双击缩放
  * @param {Boolean} options.enableRotate 允许旋转
  * @param {Boolean} options.enableDrag 允许拖拽
  * @constructor
@@ -33,6 +34,7 @@ function Cropper(imageUrl,options){
         maskColor:'rgba(0,0,0,0.6)',
         lineColor:'#fff',
         enableZoom:true,
+        enableDoubleTapZoom:true,
         enableRotate:true,
         enableDrag:true,
     },options);
@@ -48,6 +50,9 @@ function Cropper(imageUrl,options){
 
     // 图片UI
     this.imageUI = null;
+
+    // 初始时image的容器
+    this.initImageRect = null;
 
     this.init();
 }
@@ -153,6 +158,7 @@ Cropper.prototype._addImage = function(image){
     }
 
     console.log('scaleRatio',scaleRatio,ratioW<ratioH)
+    this.initImageRect = new Ycc.Math.Rect(imageRect); //存储初始高宽
     this.imageUI = new Ycc.UI.Image({
         rect:imageRect,
         fillMode:'scale',
@@ -205,14 +211,40 @@ Cropper.prototype._addImage = function(image){
         imageRect.width = tempRect.width*rate;
         imageRect.height =tempRect.height*rate;
 
-        // 固定锚点在图片正中心
         imageRect.x = tempRect.x-(imageRect.width-tempRect.width)/2;
         imageRect.y = tempRect.y-(imageRect.height-tempRect.height)/2;
     };
+    // 双击缩放
+    this.ycc.gesture.ondoubletap = function(e){
+        if(!cropper.options.enableDoubleTapZoom) return;
+
+        // var rate = e.zoomRate;
+        // imageRect.width = tempRect.width*rate;
+        // imageRect.height =tempRect.height*rate;
+        if(imageRect.width!=cropper.initImageRect.width){
+            imageRect.width = cropper.initImageRect.width;
+            imageRect.height = cropper.initImageRect.height;
+            imageRect.x = cropper.initImageRect.x;
+            imageRect.y = cropper.initImageRect.y;
+            cropper.imageUI.rotation = 0;
+        }else{
+            imageRect.width = cropper.initImageRect.width*2;
+            imageRect.height = cropper.initImageRect.height*2;
+            imageRect.x = cropper.initImageRect.x-cropper.initImageRect.width/2;
+            imageRect.y = cropper.initImageRect.y-cropper.initImageRect.height/2;
+            cropper.imageUI.rotation = 0;
+        }
+
+        // imageRect.x = tempRect.x-(imageRect.width-tempRect.width)/2;
+        // imageRect.y = tempRect.y-(imageRect.height-tempRect.height)/2;
+    };
+
     this.ycc.gesture.onrotate = function(e){
         if(!cropper.options.enableRotate) return;
 
         var angle = e.angle;
+
+        // 固定锚点在图片正中心
         cropper.imageUI.anchorX = imageRect.x+imageRect.width/2;
         cropper.imageUI.anchorY = imageRect.y+imageRect.height/2;
         cropper.imageUI.rotation = tempRotation + angle;

@@ -1,6 +1,6 @@
 {
   "name": "@datagetter.cn/image-cropper",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Image Cropper used in multiple environments, such as WeChat, Web, H5, powerd by http://datagetter.cn",
   "main": "build/lib.js",
   "directories": {
