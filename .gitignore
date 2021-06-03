@@ -2,3 +2,4 @@ node_modules
 build/*.map
 package-lock.json
 .idea
+deploy.sh

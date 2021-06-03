@@ -11,6 +11,9 @@ module.exports = {
     aggregateTimeout: 300,
     ignored: ['build/*', /node_modules/],
   },
+  devServer:{
+    host: "0.0.0.0"
+  },
   output: {
     libraryTarget: "umd",
     path: path.resolve(__dirname, 'build')
