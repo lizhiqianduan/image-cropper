@@ -133,7 +133,7 @@ window.takePhoto = function (){
 
 ## cropper对象 方法
 | 方法名 | 入参 | 出参 | 描述 | 
-| -- | -- | -- | -- | -- |
+| -- | -- | -- | -- |
 | getCropImage | canvasId{String} | image{FilePath\|ImageData} | 获取裁剪区的图片 小程序返回图片路径，H5、Web返回ImageData |
 | clear |  |  | 清空当前画布所有内容，当多个Cropper实例公用同一个canvas时，可能需要调用 |
 
