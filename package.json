@@ -1,5 +1,5 @@
 {
-  "name": "@datagetter.cn/image-cropper",
+  "name": "@datagetter.cn/ycc-cropper",
   "version": "1.1.1",
   "description": "Image Cropper used in multiple environments, such as WeChat, Web, H5, powerd by http://datagetter.cn",
   "main": "build/lib.js",

@@ -12,7 +12,7 @@ Image Cropper是一款兼容多平台的图片裁剪工具库，由 http://datag
 
 # 安装
 ```
-npm install @datagetter.cn/image-cropper --save
+npm install @datagetter.cn/ycc-cropper --save
 ```
 # 小程序用法
 ## wxml文件
@@ -30,7 +30,7 @@ npm install @datagetter.cn/image-cropper --save
 ## page/index.js脚本文件
 ```Javascript
 // miniprogram/pages/index.js
-const Cropper = require('@datagetter.cn/image-cropper').default;
+const Cropper = require('@datagetter.cn/ycc-cropper').default;
 
 Page({
   /**
@@ -101,7 +101,7 @@ window.takePhoto = function (){
 ```
 ### ES5 传统模式调用 可直接引入script脚本
 ```html
-<script src="./node_modules/@datagetter.cn/image-cropper/build/lib.js"></script>
+<script src="./node_modules/@datagetter.cn/ycc-cropper/build/lib.js"></script>
 ```
 # new Cropper(imageUrl,option)详细说明
 ## 参数说明
